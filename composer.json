@@ -25,5 +25,10 @@
         "psr-4": {
             "Snlbaral\\Coinbase\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
     }
 }
