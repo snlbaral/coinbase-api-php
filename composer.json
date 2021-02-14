@@ -1,0 +1,29 @@
+{
+    "name": "snlbaral/coinbase-api-php",
+    "description": "Coinbase API for PHP.",
+    "homepage": "https://github.com/snlbaral/coinbase-api-php",
+    "prefer-stable": true,
+    "keywords": [
+        "snlbaral",
+        "coinbase",
+        "bitcoin",
+        "api"
+    ],
+    "authors": [
+        {
+            "name": "Sunil Baral",
+        }
+    ],
+    "support": {
+        "email": "support@jcloudia.com",
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.2"
+    },
+ 
+    "autoload": {
+        "psr-4": {
+            "Snlbaral\\Coinbase\\": "src/"
+        }
+    },
+}
