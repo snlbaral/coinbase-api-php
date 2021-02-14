@@ -165,3 +165,15 @@ try {
 	}
 
 }
+```
+
+License
+-------
+
+This library for PHP is licensed under the [3-Clause
+BSD License][bsd-3-clause].
+
+Credits
+-------
+
+This library for PHP is developed and maintained by Sunil Baral.
