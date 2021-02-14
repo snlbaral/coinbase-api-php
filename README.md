@@ -1,9 +1,7 @@
 # coinbase-api-php
 
-[![Build Status](https://travis-ci.org/snlbaral/coinbase-api-php.svg)](https://travis-ci.org/snlbaral/coinbase-api-php)
-[![Total Downloads](https://poser.pugx.org/snlbaral/coinbase-api-php/d/total.svg)](https://packagist.org/packages/snlbaral/coinbase-api-php)
-[![Code Coverage](https://codecov.io/gh/snlbaral/coinbase-api-php/badge.svg)](https://codecov.io/gh/snlbaral/coinbase-api-php)
-[![License](https://poser.pugx.org/snlbaral/coinbase-api-php/license)](https://packagist.org/packages/snlbaral/coinbase-api-php)
+[![Latest Stable Version](https://poser.pugx.org/snlbaral/coinbase-api-php/v)](//packagist.org/packages/snlbaral/coinbase-api-php) [![Total Downloads](https://poser.pugx.org/snlbaral/coinbase-api-php/downloads)](//packagist.org/packages/snlbaral/coinbase-api-php) [![Latest Unstable Version](https://poser.pugx.org/snlbaral/coinbase-api-php/v/unstable)](//packagist.org/packages/snlbaral/coinbase-api-php) [![License](https://poser.pugx.org/snlbaral/coinbase-api-php/license)](//packagist.org/packages/snlbaral/coinbase-api-php)
+
 
 This is an open source library that allows PHP applications to interact programmatically with the <a href="https://developers.coinbase.com/docs/wallet/coinbase-connect">COINBASE CONNECT (OAUTH2)</a>.
 
