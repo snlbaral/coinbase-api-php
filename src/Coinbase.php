@@ -17,9 +17,8 @@ class Coinbase
 		$this->client = new GuzzleHttpClient();
 	}
 
-	public function getAccessToken()
+	public function getAccessToken($refreshToken)
 	{
-		$refreshToken = file_get_contents('refreshToken.txt');
 		$response = $this->client->Request(
 			'POST',
 			'https://api.coinbase.com/oauth/token',
@@ -138,6 +137,102 @@ class Coinbase
 			]			
 		);
 		return $response->getBody()->getContents();
+	}
+
+	public function sendMoney($accessToken,$to,$amount,$currency)
+	{
+		$response = $this->client->Request(
+			'POST',
+			'https://api.coinbase.com/v2/accounts/'.$this->config["COINBASE_ACCOUNT_ID"].'/transactions',
+			[
+				'headers' => [
+					"Authorization" => "Bearer ".$accessToken,
+				],
+				'form_params' => [
+					'type' => 'send',
+					'to' => $to,
+					'amount' => $amount,
+					'currency' => $currency
+				],
+			]			
+		);
+		return $response->getBody()->getContents();		
+	}
+
+	public function requestMoney($accessToken,$to,$amount,$currency)
+	{
+		$response = $this->client->Request(
+			'POST',
+			'https://api.coinbase.com/v2/accounts/'.$this->config["COINBASE_ACCOUNT_ID"].'/transactions',
+			[
+				'headers' => [
+					"Authorization" => "Bearer ".$accessToken,
+				]
+			],
+			[
+				'form_params' => [
+					'type' => 'request',
+					'to' => $to,
+					'amount' => $amount,
+					'currency' => $currency
+				]
+			]		
+		);
+		return $response->getBody()->getContents();		
+	}
+
+	public function getCurrencies()
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/currencies',
+		);
+		return $response->getBody()->getContents();
+	}
+
+	public function getExchangeRates()
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/exchange-rates',
+		);
+		return $response->getBody()->getContents();		
+	}
+
+	public function getBuyPrice($crypto,$currency)
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/prices/'.$crypto.'-'.$currency.'/buy',
+		);
+		return $response->getBody()->getContents();			
+	}
+
+	public function getSellPrice($crypto,$currency)
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/prices/'.$crypto.'-'.$currency.'/sell',
+		);
+		return $response->getBody()->getContents();			
+	}
+
+	public function getSpotPrice($crypto,$currency)
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/prices/'.$crypto.'-'.$currency.'/spot',
+		);
+		return $response->getBody()->getContents();			
+	}
+
+	public function getTime()
+	{
+		$response = $this->client->Request(
+			'GET',
+			'https://api.coinbase.com/v2/time',
+		);
+		return $response->getBody()->getContents();			
 	}
 
 }
