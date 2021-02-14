@@ -31,9 +31,8 @@ Quick start
 -----------
 
 Create an OAuth2 Application. Once created, your application is assigned with ***Client ID***, ***Client secret***.
+Once you have a *Redirect URI*, a *Client ID*, and a *Client Secret*, your web application can start using this library by following these steps.
 **Warning: *Client Secrets* are similar to passwords or private keys by allowing an application to identify as yours: therefore, *Client Secrets* should be kept private.**
-Once you have a *Redirect URI*, a *Client ID*, and a *Client Secret*, your web
-application can start using this library by following these steps.
 
 ### Step 1: create your configuration
 
@@ -73,7 +72,7 @@ if(isset($_GET['code'])) {
 	curl_setopt($ch, CURLOPT_URL,"https://api.coinbase.com/oauth/token");
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS,
-	            "grant_type=authorization_code&code=".$code."&client_id=".$config['COINBASE_CLIENT_ID']."&client_secret=".$config['COINBASE_CLIENT_SECRET']."&redirect_uri=".$redirect);
+		    "grant_type=authorization_code&code=".$code."&client_id=".$config['COINBASE_CLIENT_ID']."&client_secret=".$config['COINBASE_CLIENT_SECRET']."&redirect_uri=".$redirect);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$server_output = curl_exec($ch);
 	curl_close ($ch);
@@ -82,8 +81,8 @@ if(isset($_GET['code'])) {
 	$refresh_token = $data['refresh_token'];
 	file_put_contents('refreshToken.txt', $refresh_token);
 	$_SESSION['coinbase_token'] = $access_token;
-    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-    return;
+	header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+	return;
 }
 
 if(isset($_REQUEST['logout'])) {
@@ -103,3 +102,32 @@ if(!isset($_SESSION['coinbase_token'])) {
 
 After creating `coinbase_token.php` file and adding this uri to your applications redirect uri(s). Open `coinbase_token.php` and authorize the application.
 It will return an access token, save this token to use it in the application.
+
+
+Usages
+----------
+
+**Init**
+```php
+require 'vendor/autoload.php';
+use Snlbaral\Coinbase\Coinbase;
+
+$client = new Coinbase();
+$accessToken = "<Access Token from Step 3>";
+```
+
+**Get Address**
+```php
+$address = $client->getAddress($accessToken);
+```
+
+**List transactions**
+```php
+$transactions = $client->listTransactions($accessToken);
+```
+
+**Warning: Access Token is only valid for 2 hours. After 2 hours you'll need to get new access token to continue using the service through OAuth2**
+```php
+$refreshToken = file_get_contents('refreshToken.txt');
+$accessToken = $client->getAccessToken($refreshToken); //returns new access token valid for next 2 hours.
+```
