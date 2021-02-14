@@ -2,6 +2,7 @@
     "name": "snlbaral/coinbase-api-php",
     "description": "Coinbase API for PHP.",
     "homepage": "https://github.com/snlbaral/coinbase-api-php",
+    "license": "GNU-General-Public-License-v3.0",
     "prefer-stable": true,
     "keywords": [
         "snlbaral",
