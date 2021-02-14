@@ -90,8 +90,8 @@ if(isset($_GET['code'])) {
 	$refresh_token = $data['refresh_token'];
 	file_put_contents('refreshToken.txt', $refresh_token);
 	$_SESSION['coinbase_token'] = $access_token;
-    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-    return;
+	header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+	return;
 }
 
 if(isset($_REQUEST['logout'])) {
