@@ -126,8 +126,33 @@ $address = $client->getAddress($accessToken);
 $transactions = $client->listTransactions($accessToken);
 ```
 
-**Warning: Access Token is only valid for 2 hours. After 2 hours you'll need to get new access token to continue using the service through OAuth2**
+**Warning: Access Token is only valid for 2 hours. After 2 hours it will return a 401 error. You'll need to get new access token to continue using the service through OAuth2**
 ```php
 $refreshToken = file_get_contents('refreshToken.txt');
 $accessToken = $client->getAccessToken($refreshToken); //returns new access token valid for next 2 hours.
 ```
+
+
+**Example.php**
+
+```php
+try {
+	$address = $client->getAddress($accessToken);
+	print_r($address);
+	//$address = json_decode($address,true);
+	//echo $address['data']['address'];
+} catch (Exception $e) {
+
+	if($e->getCode()==401) {
+		$refreshToken = file_get_contents('refreshToken.txt');
+		$accessToken = $client->getAccessToken($refreshToken);
+		//Save/Update the this new access token to use it for next 2 hours
+		
+		//Get Address using new access token
+		$address = $client->getAddress($accessToken);
+		print_r($address);		
+	} else {
+		print_r($e->getMessage());
+	}
+
+}
