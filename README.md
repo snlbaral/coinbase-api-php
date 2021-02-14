@@ -170,8 +170,8 @@ try {
 License
 -------
 
-This library for PHP is licensed under the [3-Clause
-BSD License][bsd-3-clause].
+This library for PHP is licensed under the <a href="https://opensource.org/licenses/BSD-3-Clause">[3-Clause
+BSD License]</a>
 
 Credits
 -------
